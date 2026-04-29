@@ -3,6 +3,7 @@ package io.github.rainvaporeon.handler;
 import io.github.rainvaporeon.data.AscendanceTemplateInfo;
 import io.github.rainvaporeon.data.ItemAscendanceInfo;
 import io.github.rainvaporeon.utils.AscendanceHelper;
+import io.github.rainvaporeon.utils.FeatureConsts;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -64,7 +65,7 @@ public class SmithingHandler implements Listener {
     }
 
     private boolean canAscend(ItemStack is, int toTier) {
-        if (toTier > 3) return false;
+        if (toTier > FeatureConsts.ascendanceCap()) return false;
 
         int currentEnchantments = (int) is.getEnchantments().values().stream().filter(i -> i != null && i > 0).count();
         if (currentEnchantments < toTier) return false; // impossible to over-tier

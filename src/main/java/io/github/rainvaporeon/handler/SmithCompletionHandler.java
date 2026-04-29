@@ -3,10 +3,7 @@ package io.github.rainvaporeon.handler;
 import io.github.rainvaporeon.EntryPoint;
 import io.github.rainvaporeon.data.FakeItemInfo;
 import io.github.rainvaporeon.data.ItemAscendanceInfo;
-import io.github.rainvaporeon.utils.AscendanceHelper;
-import io.github.rainvaporeon.utils.ItemUtils;
-import io.github.rainvaporeon.utils.ListHelper;
-import io.github.rainvaporeon.utils.RomanNumeral;
+import io.github.rainvaporeon.utils.*;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
@@ -66,7 +63,7 @@ public class SmithCompletionHandler implements Listener {
         Enchantment selection = ListHelper.randomElement(
                 info.upgradeCandidates(),
                 info.attunement(),
-                info.attunement() == null ? 0 : 2
+                info.attunement() == null ? 0 : FeatureConsts.attuneMaxRerolls()
         );
 
         int targetLevelSrc = isx.removeEnchantment(selection);
