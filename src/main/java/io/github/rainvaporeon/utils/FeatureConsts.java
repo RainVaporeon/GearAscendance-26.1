@@ -10,6 +10,8 @@ public class FeatureConsts {
      * Gets the maximum levels of ascendance allowed
      * @return the maximum level of ascendance that can be performed on an item
      */
+    // Balance note: Limiting the maximum ascensions requires the player
+    //               to pick at most this many enchantments to boost.
     public static int ascendanceCap() {
         return 3;
     }
@@ -19,6 +21,8 @@ public class FeatureConsts {
      * is not the specified attuned enchantment
      * @return the maximum rerolls to perform
      */
+    // Balance note: Recall that it is easier to get a specific enchantment
+    //               boosted as the ascension rises.
     public static int attuneMaxRerolls() {
         return 2;
     }
@@ -28,15 +32,18 @@ public class FeatureConsts {
      * @param templateTier the tier
      * @return the rate
      */
+    // Balance note: Making the initial success rate pathetic may encourage
+    //               players to not settle for getting more low-tier template
+    //               and instead focusing on getting higher tiered templates.
     public static int successMultiplier(int templateTier) {
         if (templateTier <= 0) return 0;
         return switch (templateTier) {
-            case 1 -> 50;
-            case 2 -> 65;
-            case 3 -> 80;
-            case 4 -> 100;
-            case 5 -> 110;
-            default -> 100 + (10 * (templateTier - 4));
+            case 1 -> 40;
+            case 2 -> 70;
+            case 3 -> 100;
+            case 4 -> 130;
+            case 5 -> 140;
+            default -> 150 + (10 * (templateTier - 4));
         };
     }
 
@@ -45,13 +52,16 @@ public class FeatureConsts {
      * @param upgradeTier the starting tier one is upgrading from
      * @return the rate
      */
+    // Balance note: Higher ascendance level naturally points to more value
+    //               associated with the item, in addition to reduction of
+    //               possible enchantments to boost.
     public static int baseSuccessRate(int upgradeTier) {
         if (upgradeTier < 0) return 100;
         return switch (upgradeTier) {
-            case 0 -> 80;
-            case 1 -> 75;
-            case 2 -> 40;
-            case 3 -> 15;
+            case 0 -> 50;
+            case 1 -> 35;
+            case 2 -> 15;
+            case 3 -> 10;
             case 4 -> 5;
             default -> 0;
         };
