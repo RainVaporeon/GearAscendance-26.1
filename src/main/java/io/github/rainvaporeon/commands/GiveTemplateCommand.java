@@ -61,7 +61,7 @@ public class GiveTemplateCommand implements CommandExecutor, TabExecutor {
         if (is.hasItemMeta()) {
             ItemMeta meta = is.getItemMeta();
             assert meta != null;
-            name = meta.getDisplayName();
+            name = meta.getItemName();
         } else {
             name = is.getType().toString();
         }

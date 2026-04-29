@@ -45,6 +45,8 @@ public class SmithingHandler implements Listener {
         ItemAscendanceInfo info = AscendanceHelper.getItemAscendanceInfo(craftingTool);
         AscendanceTemplateInfo templateInfo = AscendanceHelper.getAscendingTemplateInfo(templateItem);
 
+        if (templateInfo == AscendanceTemplateInfo.NONE) return;
+
         if (!this.canAscend(craftingTool, info.ascendanceTier() + 1)) {
             event.setResult(null);
             return;
