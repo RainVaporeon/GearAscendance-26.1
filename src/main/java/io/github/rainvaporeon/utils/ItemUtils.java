@@ -116,12 +116,22 @@ public class ItemUtils {
         return ls;
     }
 
+    /**
+     * Performs modification on the ItemStack's ItemMeta.
+     * @param isx the item stack
+     * @param metaConsumer the meta to perform modification on
+     */
     public static void applyMeta(ItemStack isx, Consumer<ItemMeta> metaConsumer) {
         ItemMeta im = isx.getItemMeta();
         metaConsumer.accept(im);
         isx.setItemMeta(im);
     }
 
+    /**
+     * Gets the native rarity by smithing template tier
+     * @param level the level
+     * @return the tier
+     */
     private static ItemRarity getRarityByTier(int level) {
         if (level >= 5) return ItemRarity.EPIC;
         if (level == 4) return ItemRarity.RARE;
@@ -136,15 +146,7 @@ public class ItemUtils {
      * @apiNote template after level 5 is generated with 10% each level beyond level 4
      */
     public static int getSuccessMultiplierPercentage(int level) {
-        if (level <= 0) return 0;
-        return switch (level) {
-            case 1 -> 50;
-            case 2 -> 65;
-            case 3 -> 80;
-            case 4 -> 100;
-            case 5 -> 110;
-            default -> 100 + (10 * (level - 4));
-        };
+        return FeatureConsts.successMultiplier(level);
     }
 
     /**
@@ -154,14 +156,6 @@ public class ItemUtils {
      * @apiNote success chance after level 5 always fails.
      */
     public static int getBaseSuccessChance(int level) {
-        if (level < 0) return 100;
-        return switch (level) {
-            case 0 -> 80;
-            case 1 -> 75;
-            case 2 -> 40;
-            case 3 -> 15;
-            case 4 -> 5;
-            default -> 0;
-        };
+        return FeatureConsts.baseSuccessRate(level);
     }
 }
