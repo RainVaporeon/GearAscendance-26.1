@@ -14,15 +14,11 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
-public class GiveTemplateCommand implements CommandExecutor, TabExecutor, CommandExtensionHelper {
-    @Override
-    public String getName() {
-        return "ascendance";
-    }
+public class GiveTemplateCommand implements CommandExecutor, TabExecutor {
 
     @Override
     public boolean onCommand(@NonNull CommandSender sender, @NonNull Command command, @NonNull String label, String @NonNull [] args) {
-        if (!checkCommand(command)) return false;
+        if (!"ascendance".equals(command.getName())) return false;
 
         if (!(sender instanceof Player player)) {
             sender.sendMessage("You need to be a player to run this command!");
@@ -80,7 +76,7 @@ public class GiveTemplateCommand implements CommandExecutor, TabExecutor, Comman
 
     @Override
     public List<String> onTabComplete(@NonNull CommandSender sender, @NonNull Command command, @NonNull String label, String @NonNull [] args) {
-        if (!checkCommand(command)) return List.of();
+        if (!"ascendance".equals(command.getName())) return List.of();
 
         if (args.length == 0) {
             return List.of("give");

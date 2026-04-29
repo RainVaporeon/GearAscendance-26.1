@@ -1,7 +1,6 @@
 package io.github.rainvaporeon.handler;
 
 import io.github.rainvaporeon.EntryPoint;
-import io.github.rainvaporeon.data.AscendanceTemplateInfo;
 import io.github.rainvaporeon.data.FakeItemInfo;
 import io.github.rainvaporeon.data.ItemAscendanceInfo;
 import io.github.rainvaporeon.utils.AscendanceHelper;
@@ -28,7 +27,7 @@ public class SmithCompletionHandler implements Listener {
     public void onSmithCompletion(SmithItemEvent event) {
         ItemStack is = event.getInventory().getResult();
 
-        if (is == null) return;;
+        if (is == null) return;
 
         FakeItemInfo info = this.getFakeItem(is);
 

@@ -31,7 +31,7 @@ public class ItemUtils {
         return true;
     }
 
-    public static boolean setTemplateAscendanceTier(ItemStack is, int level, boolean blessed, Enchantment attuned) {
+    public static void setTemplateAscendanceTier(ItemStack is, int level, boolean blessed, Enchantment attuned) {
         if (!is.hasItemMeta()) {
             ItemMeta im = is.getItemMeta();
             is.setItemMeta(im);
@@ -42,8 +42,6 @@ public class ItemUtils {
         ItemUtils.applyMeta(is, meta -> {
             meta.setEnchantmentGlintOverride(level >= 1);
             meta.setRarity(ItemUtils.getRarityByTier(level));
-            meta.addItemFlags(ItemFlag.values());
-            meta.removeItemFlags(ItemFlag.HIDE_LORE);
             if (blessed) {
                 if (attuned != null) {
                     meta.setLore(ItemUtils.getBlessedTemplateLoreAtTierAttuned(level, attuned));
@@ -72,8 +70,6 @@ public class ItemUtils {
                     ai.toDetailJson()
             );
         });
-
-        return true;
     }
 
     public static String convertToDisplayName(Enchantment e) {
