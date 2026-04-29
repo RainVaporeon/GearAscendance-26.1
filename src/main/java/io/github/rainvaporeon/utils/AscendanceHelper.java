@@ -92,7 +92,11 @@ public class AscendanceHelper {
         return isx;
     }
 
-    private static Predicate<String> clearIntermediateDescriptions() {
+    /**
+     * Provides a predicate that clears intermediate lore
+     * @return the predicate
+     */
+    private static Predicate<String> clearIntermediatePredicate() {
         return str -> {
             return str.contains("Ascended ") ||
                     str.contains(ChatColor.LIGHT_PURPLE + "Blessed") ||
@@ -102,13 +106,22 @@ public class AscendanceHelper {
     }
 
     public static void reapplyAscendTier(ItemStack isx, int tier) {
-        if (tier < 0) return;
+        if (tier <= 0) {
+            ItemUtils.applyMeta(isx, meta -> {
+                List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
+
+                assert lore != null;
+
+                lore.removeIf(AscendanceHelper.clearIntermediatePredicate());
+            });
+            return;
+        }
         ItemUtils.applyMeta(isx, meta -> {
             List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
 
             assert lore != null;
 
-            lore.removeIf(AscendanceHelper.clearIntermediateDescriptions());
+            lore.removeIf(AscendanceHelper.clearIntermediatePredicate());
 
             ChatColor color = switch (tier) {
                 case 1 -> ChatColor.GRAY;
@@ -131,7 +144,7 @@ public class AscendanceHelper {
 
             assert lore != null;
 
-            lore.removeIf(AscendanceHelper.clearIntermediateDescriptions());
+            lore.removeIf(AscendanceHelper.clearIntermediatePredicate());
 
             ChatColor color = switch (tier) {
                 case 1 -> ChatColor.GRAY;
