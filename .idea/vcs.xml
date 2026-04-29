@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/srv/BuildData" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/srv/Bukkit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/srv/CraftBukkit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/srv/Spigot" vcs="Git" />
+  </component>
+</project>

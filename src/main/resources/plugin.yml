@@ -1,0 +1,23 @@
+name: 'GearAscendance'
+description: 'Adds a new extension beyond enchantment and netherite smithing.'
+version: '1.0.0'
+main: 'io.github.rainvaporeon.EntryPoint'
+api-version: '26.1'
+author: 'RainVaporeon'
+
+commands:
+  ascendance:
+    description: 'Main command'
+    permission: 'ascendance.give.template'
+    usage: "/ascendance give template [amount] [tier] [blessed] [bias]"
+
+permissions:
+  ascendance.*:
+    description: 'Provides all capabilities to /ascendance'
+    default: op
+    children:
+      ascendance.give.*: true
+  ascendance.give.*:
+    description: 'Provides all give capabilities to /ascendance'
+    children:
+      ascendance.give.template: true
