@@ -18,7 +18,20 @@ public class SmithingHandler implements Listener {
         ItemStack craftingTool = event.getInventory().getItem(1);
         ItemStack withMaterial = event.getInventory().getItem(2);
 
-        if (!AscendanceHelper.isValidTemplateItem(templateItem)) return;
+        if (!AscendanceHelper.isValidTemplateItem(templateItem)) {
+            if (templateItem == null) return;
+            // otherwise look and intercept any non-diamond tool
+            if (templateItem.getType().equals(Material.NETHERITE_UPGRADE_SMITHING_TEMPLATE)) {
+                if (craftingTool == null) return;
+                Material mat = craftingTool.getType();
+                if (mat.isAir()) return;
+                // where we intercept and nuke; simple checking is enough for what the datapack tries to offer.
+                if (!mat.name().startsWith("DIAMOND_")) {
+                    event.setResult(null);
+                    return;
+                }
+            }
+        }
         // onwards we are testing against a valid template
         if (withMaterial == null || withMaterial.getType() != Material.NETHERITE_INGOT) {
             event.setResult(null);
