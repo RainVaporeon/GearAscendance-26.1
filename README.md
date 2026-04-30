@@ -13,3 +13,5 @@ bias: reroll up to 2 more times so you are more likely to get the bias enchantme
 
 
 note: you need to use the universal_netherite.zip datapack to permit things other than diamond; by default using the templates will result in the template being returned, the plugin will block the recipe
+
+note 2: you need to use the ascendance_recipes.zip datapack to add custom recipes for the plugin to work (the plugin will replace the result on craft)
