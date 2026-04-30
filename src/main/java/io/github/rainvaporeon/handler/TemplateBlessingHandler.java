@@ -27,11 +27,11 @@ public class TemplateBlessingHandler implements Listener {
 
         if (!AscendanceHelper.isValidTemplateItem(templateItem)) return;
         // onwards we are testing against a valid template
-        if (withMaterial == null || withMaterial.getType() != Material.HEART_OF_THE_SEA) {
+        if (withMaterial == null || withMaterial.getType() != Material.TOTEM_OF_UNDYING) {
             event.setResult(null);
             return;
         }
-        if (craftingTool == null || craftingTool.getType() != Material.TOTEM_OF_UNDYING) {
+        if (craftingTool == null || craftingTool.getType() != Material.HEART_OF_THE_SEA) {
             event.setResult(null);
             return;
         }
