@@ -1,10 +1,7 @@
 package io.github.rainvaporeon;
 
 import io.github.rainvaporeon.commands.GiveTemplateCommand;
-import io.github.rainvaporeon.handler.GrindstoneHandler;
-import io.github.rainvaporeon.handler.SmithCompletionHandler;
-import io.github.rainvaporeon.handler.SmithingHandler;
-import io.github.rainvaporeon.handler.TemplateUpgradeHandler;
+import io.github.rainvaporeon.handler.*;
 import io.github.rainvaporeon.utils.NamespaceManager;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
@@ -40,7 +37,8 @@ public class EntryPoint extends JavaPlugin {
                 new GrindstoneHandler(),
                 new SmithCompletionHandler(),
                 new SmithingHandler(),
-                new TemplateUpgradeHandler()
+                new TemplateUpgradeHandler(),
+                new TemplateBlessingHandler()
         );
     }
 
