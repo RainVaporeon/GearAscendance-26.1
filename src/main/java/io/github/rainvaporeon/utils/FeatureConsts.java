@@ -28,6 +28,51 @@ public class FeatureConsts {
     }
 
     /**
+     * Gets the base success rate on attuning
+     * @return the success rate
+     */
+    public static int attuneSuccessRate() {
+        return 20;
+    }
+
+    public static int attunementXPCost() {
+        return 30;
+    }
+
+    /**
+     * Gets the attunement success multiplier by template tier
+     * @param templateTier the template tier
+     * @return the multiplier
+     */
+    public static int attuneSuccessMultiplier(int templateTier) {
+        if (templateTier <= 0) return 0;
+        return switch (templateTier) {
+            case 1 -> 50;
+            case 2 -> 75;
+            case 3 -> 100;
+            case 4 -> 150;
+            case 5 -> 200;
+            default -> 200 + (templateTier - 5) * 25;
+        };
+    }
+
+    public static int blessingSuccessRate() {
+        return 40;
+    }
+
+    public static int blessingSuccessMultiplier(int templateTier) {
+        if (templateTier <= 0) return 0;
+        return switch (templateTier) {
+            case 1 -> 0;
+            case 2 -> 66;
+            case 3 -> 133;
+            case 4 -> 200;
+            case 5 -> 250;
+            default -> 250 + (templateTier - 5) * 50;
+        };
+    }
+
+    /**
      * Gets the success rate multiplier to the ascendance template
      * @param templateTier the tier
      * @return the rate
@@ -63,7 +108,7 @@ public class FeatureConsts {
             case 2 -> 15;
             case 3 -> 10;
             case 4 -> 5;
-            default -> 0;
+            default -> 2;
         };
     }
 }

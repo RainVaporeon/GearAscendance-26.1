@@ -2,6 +2,7 @@ package io.github.rainvaporeon.data;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import io.github.rainvaporeon.EntryPoint;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
@@ -10,10 +11,10 @@ public record AscendanceTemplateInfo(
         int tier,
         boolean blessed,
         Enchantment attune
-) {
+) implements Attachable {
     public static final AscendanceTemplateInfo NONE = new AscendanceTemplateInfo(-1, false, null);
 
-    public String toDetailJson() {
+    public String toJson() {
         JsonObject jo = new JsonObject();
         jo.addProperty("tier", tier);
         jo.addProperty("blessed", blessed);
@@ -23,6 +24,11 @@ public record AscendanceTemplateInfo(
             jo.addProperty("attune", String.valueOf(attune.getKeyOrNull()));
         }
         return jo.toString();
+    }
+
+    @Override
+    public NamespacedKey key() {
+        return EntryPoint.getAscendanceTemplateInfoKey();
     }
 
     public static AscendanceTemplateInfo fromJson(String json) {

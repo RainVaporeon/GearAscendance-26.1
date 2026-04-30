@@ -3,6 +3,7 @@ package io.github.rainvaporeon.data;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import io.github.rainvaporeon.EntryPoint;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
@@ -10,20 +11,25 @@ import org.bukkit.enchantments.Enchantment;
 import java.util.ArrayList;
 import java.util.List;
 
-public record FakeItemInfo(
+public record FakeAscendanceItemInfo(
         int nextTier,
         List<Enchantment> upgradeCandidates,
         Enchantment attunement,
         boolean blessed,
         double successProbability
-) {
-    public static final FakeItemInfo NONE = new FakeItemInfo(
+) implements Attachable {
+    public static final FakeAscendanceItemInfo NONE = new FakeAscendanceItemInfo(
             -1,
             List.of(),
             null,
             false,
             0
     );
+
+    @Override
+    public NamespacedKey key() {
+        return EntryPoint.getGeneratedAscendanceFakeItemKey();
+    }
 
     public String toJson() {
         JsonObject jo = new JsonObject();
@@ -41,7 +47,7 @@ public record FakeItemInfo(
         return jo.toString();
     }
 
-    public static FakeItemInfo fromJson(String json) {
+    public static FakeAscendanceItemInfo fromJson(String json) {
         if (json == null) return NONE;
         try {
             JsonObject payload = JsonParser.parseString(json).getAsJsonObject();
@@ -52,7 +58,7 @@ public record FakeItemInfo(
                 if (je.getAsString().equals("null") || je.getAsString().isBlank()) return;
                 enchantments.add(Registry.ENCHANTMENT.get(NamespacedKey.fromString(je.getAsString())));
             });
-            return new FakeItemInfo(
+            return new FakeAscendanceItemInfo(
                     payload.get("nextTier").getAsInt(),
                     enchantments,
                     attune,

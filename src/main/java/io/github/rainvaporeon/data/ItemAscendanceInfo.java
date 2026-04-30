@@ -3,6 +3,7 @@ package io.github.rainvaporeon.data;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import io.github.rainvaporeon.EntryPoint;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
@@ -19,8 +20,13 @@ public record ItemAscendanceInfo(
          * All enchantments that were ascended
          */
         List<Enchantment> appliedAscendance
-) {
+) implements Attachable {
     public static final ItemAscendanceInfo NONE = new ItemAscendanceInfo(0, List.of());
+
+    @Override
+    public NamespacedKey key() {
+        return EntryPoint.getItemAscendanceInfoKey();
+    }
 
     public String toJson() {
         JsonObject jo = new JsonObject();

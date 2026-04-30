@@ -2,10 +2,6 @@ package io.github.rainvaporeon.utils;
 
 import io.github.rainvaporeon.EntryPoint;
 import io.github.rainvaporeon.data.AscendanceTemplateInfo;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.ItemTag;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.chat.hover.content.Item;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -13,7 +9,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
@@ -65,9 +60,9 @@ public class ItemUtils {
             meta.setItemName(sb.toString());
             AscendanceTemplateInfo ai = new AscendanceTemplateInfo(level, blessed, attuned);
             meta.getPersistentDataContainer().set(
-                    EntryPoint.getSmithingInfoKey(),
+                    EntryPoint.getAscendanceTemplateInfoKey(),
                     PersistentDataType.STRING,
-                    ai.toDetailJson()
+                    ai.toJson()
             );
         });
     }
@@ -86,7 +81,7 @@ public class ItemUtils {
     }
 
     public static List<String> getBlessedTemplateLoreAtTier(int tier) {
-        List<String> ls = new ArrayList<>(10);
+        List<String> ls = new ArrayList<>(16);
         ls.add(ChatColor.GRAY + "Template to perform a gear ascendance.");
         ls.add(ChatColor.GRAY + "Requires a " + ChatColor.DARK_PURPLE + "Netherite Ingot " + ChatColor.GRAY + "on a smithing table.");
         ls.add(ChatColor.GRAY + "Success multiplier: " + ChatColor.GREEN +

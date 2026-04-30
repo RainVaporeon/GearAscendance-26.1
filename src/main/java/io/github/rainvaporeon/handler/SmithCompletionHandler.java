@@ -1,7 +1,7 @@
 package io.github.rainvaporeon.handler;
 
 import io.github.rainvaporeon.EntryPoint;
-import io.github.rainvaporeon.data.FakeItemInfo;
+import io.github.rainvaporeon.data.FakeAscendanceItemInfo;
 import io.github.rainvaporeon.data.ItemAscendanceInfo;
 import io.github.rainvaporeon.utils.*;
 import org.bukkit.ChatColor;
@@ -26,9 +26,9 @@ public class SmithCompletionHandler implements Listener {
 
         if (is == null) return;
 
-        FakeItemInfo info = this.getFakeItem(is);
+        FakeAscendanceItemInfo info = this.getFakeItem(is);
 
-        if (info == FakeItemInfo.NONE) return;
+        if (info == FakeAscendanceItemInfo.NONE) return;
 
         ItemStack isx = this.performAscendance(is, info, event.getWhoClicked());
 
@@ -38,18 +38,18 @@ public class SmithCompletionHandler implements Listener {
 
     }
 
-    private FakeItemInfo getFakeItem(ItemStack is) {
-        if (!is.hasItemMeta()) return FakeItemInfo.NONE;
+    private FakeAscendanceItemInfo getFakeItem(ItemStack is) {
+        if (!is.hasItemMeta()) return FakeAscendanceItemInfo.NONE;
 
         assert is.getItemMeta() != null;
 
-        return FakeItemInfo.fromJson(is.getItemMeta().getPersistentDataContainer().get(
-                EntryPoint.getFakeItemInfo(),
+        return FakeAscendanceItemInfo.fromJson(is.getItemMeta().getPersistentDataContainer().get(
+                EntryPoint.getGeneratedAscendanceFakeItemKey(),
                 PersistentDataType.STRING
         ));
     }
 
-    private ItemStack performAscendance(ItemStack is, FakeItemInfo info, HumanEntity clicker) {
+    private ItemStack performAscendance(ItemStack is, FakeAscendanceItemInfo info, HumanEntity clicker) {
         ItemStack isx = is.clone();
 
         double randomness = Math.random();
@@ -73,7 +73,7 @@ public class SmithCompletionHandler implements Listener {
         ItemUtils.applyMeta(isx, meta -> {
             ItemAscendanceInfo ia = ItemAscendanceInfo.fromJson(
                     meta.getPersistentDataContainer().get(
-                            EntryPoint.getAscendanceInfoKey(),
+                            EntryPoint.getItemAscendanceInfoKey(),
                             PersistentDataType.STRING
                     )
             );
@@ -87,7 +87,7 @@ public class SmithCompletionHandler implements Listener {
             );
 
             meta.getPersistentDataContainer().set(
-                    EntryPoint.getAscendanceInfoKey(),
+                    EntryPoint.getItemAscendanceInfoKey(),
                     PersistentDataType.STRING,
                     nia.toJson()
             );
@@ -109,7 +109,7 @@ public class SmithCompletionHandler implements Listener {
         return isx;
     }
 
-    private ItemStack failAscendance(ItemStack is, FakeItemInfo info, HumanEntity clicker) {
+    private ItemStack failAscendance(ItemStack is, FakeAscendanceItemInfo info, HumanEntity clicker) {
         ItemStack isx = is.clone();
         int nextTier = info.nextTier();
         int currentTier = nextTier - 1;
@@ -119,7 +119,7 @@ public class SmithCompletionHandler implements Listener {
 
         ItemUtils.applyMeta(isx, meta -> {
             meta.getPersistentDataContainer().remove(
-                    EntryPoint.getFakeItemInfo()
+                    EntryPoint.getGeneratedAscendanceFakeItemKey()
             );
         });
 
