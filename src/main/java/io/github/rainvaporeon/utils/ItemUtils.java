@@ -68,8 +68,9 @@ public class ItemUtils {
     }
 
     public static String convertToDisplayName(Enchantment e) {
+        if (e == null) return "null";
         NamespacedKey key = e.getKeyOrNull();
-        if (key == null) return "";
+        if (key == null) return "null";
         String name = key.getKey(); // e.g. "sharpness"
 
         return Arrays.stream(name.split("_"))

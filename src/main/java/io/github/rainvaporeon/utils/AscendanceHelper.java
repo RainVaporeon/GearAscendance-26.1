@@ -197,7 +197,7 @@ public class AscendanceHelper {
             }
 
             if (attune != null) {
-                lore.addLast(ChatColor.AQUA + "Attuned " + ChatColor.GRAY + "(" + attune.getKeyOrNull() + ")");
+                lore.addLast(ChatColor.AQUA + "Attuned " + ChatColor.GRAY + "(" + ItemUtils.convertToDisplayName(attune) + ")");
             }
 
             lore.addLast(String.format(
