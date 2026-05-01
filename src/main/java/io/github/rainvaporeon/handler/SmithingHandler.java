@@ -26,7 +26,7 @@ public class SmithingHandler implements Listener {
                 if (craftingTool == null) return;
                 Material mat = craftingTool.getType();
                 if (mat.isAir()) return;
-                // where we intercept and nuke; simple checking is enough for what the datapack tries to offer.
+                // don't permit non-diamond w/ netherite template
                 if (!mat.name().startsWith("DIAMOND_")) {
                     event.setResult(null);
                     return;
@@ -34,14 +34,19 @@ public class SmithingHandler implements Listener {
             }
         }
         // onwards we are testing against a valid template
-        if (withMaterial == null || withMaterial.getType() != Material.NETHERITE_INGOT) {
+        if (withMaterial == null) {
+            event.setResult(null);
+            return;
+        }
+        // not netherite and not totem (blessing); invalid recipe
+        if (withMaterial.getType() != Material.NETHERITE_INGOT && withMaterial.getType() != Material.TOTEM_OF_UNDYING) {
             event.setResult(null);
             return;
         }
         if (craftingTool == null) {
-            event.setResult(null);
             return;
         }
+
 
         ItemAscendanceInfo info = AscendanceHelper.getItemAscendanceInfo(craftingTool);
         AscendanceTemplateInfo templateInfo = AscendanceHelper.getAscendingTemplateInfo(templateItem);

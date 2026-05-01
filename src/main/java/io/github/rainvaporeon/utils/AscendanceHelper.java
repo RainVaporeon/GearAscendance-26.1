@@ -145,6 +145,8 @@ public class AscendanceHelper {
                 assert lore != null;
 
                 lore.removeIf(AscendanceHelper.clearIntermediatePredicate());
+
+                meta.setLore(lore);
             });
             return;
         }
