@@ -51,8 +51,8 @@ public class FeatureConsts {
             case 2 -> 75;
             case 3 -> 100;
             case 4 -> 150;
-            case 5 -> 200;
-            default -> 200 + (templateTier - 5) * 25;
+            case 5 -> 300;
+            default -> 300 + (templateTier - 5) * 25;
         };
     }
 
@@ -86,9 +86,9 @@ public class FeatureConsts {
             case 1 -> 40;
             case 2 -> 70;
             case 3 -> 100;
-            case 4 -> 130;
-            case 5 -> 140;
-            default -> 150 + (10 * (templateTier - 4));
+            case 4 -> 150;
+            case 5 -> 200;
+            default -> 200 + (15 * (templateTier - 4));
         };
     }
 
