@@ -37,4 +37,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Testing ###
 /srv/
+!/src/main/java/io/github/rainvaporeon/utils/PSVM.java
