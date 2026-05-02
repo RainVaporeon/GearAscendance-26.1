@@ -24,6 +24,7 @@ public interface Attachable {
     /**
      * Deletes the attachable from the item
      * @param isx the item
+     * @apiNote this will delete the information associated with the key
      */
     default void detachFromItem(ItemStack isx) {
         ItemUtils.applyMeta(isx, meta -> {

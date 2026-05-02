@@ -7,6 +7,9 @@ import io.github.rainvaporeon.gearascendance.EntryPoint;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +48,18 @@ public record FakeAscendanceItemInfo(
         upgradeCandidates.forEach(en -> ja.add(String.valueOf(en.getKeyOrNull())));
         jo.add("candidates", ja);
         return jo.toString();
+    }
+
+    public static FakeAscendanceItemInfo fromItemStack(ItemStack stack) {
+        if (stack == null || stack.getType().isAir() || !stack.hasItemMeta()) return NONE;
+        ItemMeta meta = stack.getItemMeta();
+        assert meta != null;
+        return FakeAscendanceItemInfo.fromJson(
+                meta.getPersistentDataContainer().get(
+                        EntryPoint.getGeneratedAscendanceFakeItemKey(),
+                        PersistentDataType.STRING
+                )
+        );
     }
 
     public static FakeAscendanceItemInfo fromJson(String json) {

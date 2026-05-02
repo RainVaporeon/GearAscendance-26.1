@@ -6,6 +6,9 @@ import io.github.rainvaporeon.gearascendance.EntryPoint;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 public record AscendanceTemplateInfo(
         int tier,
@@ -29,6 +32,18 @@ public record AscendanceTemplateInfo(
     @Override
     public NamespacedKey key() {
         return EntryPoint.getAscendanceTemplateInfoKey();
+    }
+
+    public static AscendanceTemplateInfo fromItemStack(ItemStack stack) {
+        if (stack == null || stack.getType().isAir() || !stack.hasItemMeta()) return NONE;
+        ItemMeta meta = stack.getItemMeta();
+        assert meta != null;
+        return AscendanceTemplateInfo.fromJson(
+                meta.getPersistentDataContainer().get(
+                        EntryPoint.getAscendanceTemplateInfoKey(),
+                        PersistentDataType.STRING
+                )
+        );
     }
 
     public static AscendanceTemplateInfo fromJson(String json) {
