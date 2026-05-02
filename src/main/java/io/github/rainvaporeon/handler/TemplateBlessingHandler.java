@@ -64,6 +64,7 @@ public class TemplateBlessingHandler implements Listener {
 
         ItemStack isx = this.performBlessing(info, event.getWhoClicked());
 
+        // note: we are generating a new template here so it doesn't have the fake tag!
         event.getInventory().setResult(
                 isx
         );

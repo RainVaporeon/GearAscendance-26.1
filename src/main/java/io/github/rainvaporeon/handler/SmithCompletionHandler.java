@@ -52,6 +52,13 @@ public class SmithCompletionHandler implements Listener {
     private ItemStack performAscendance(ItemStack is, FakeAscendanceItemInfo info, HumanEntity clicker) {
         ItemStack isx = is.clone();
 
+        // important: trim the fake info from where we were cloning
+        ItemUtils.applyMeta(isx, meta -> {
+            meta.getPersistentDataContainer().remove(
+                    EntryPoint.getGeneratedAscendanceFakeItemKey()
+            );
+        });
+
         double randomness = Math.random();
         // Take 10% for example, you roll more than 0.1 and you fail
         if (randomness > info.successProbability()) {
