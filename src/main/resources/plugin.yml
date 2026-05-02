@@ -1,7 +1,7 @@
 name: 'GearAscendance'
 description: 'Adds a new extension beyond enchantment and netherite smithing.'
 version: '1.0.0'
-main: 'io.github.rainvaporeon.EntryPoint'
+main: 'io.github.rainvaporeon.gearascendance.EntryPoint'
 api-version: '26.1'
 author: 'RainVaporeon'
 

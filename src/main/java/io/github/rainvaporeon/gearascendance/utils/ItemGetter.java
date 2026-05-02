@@ -1,4 +1,4 @@
-package io.github.rainvaporeon.utils;
+package io.github.rainvaporeon.gearascendance.utils;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

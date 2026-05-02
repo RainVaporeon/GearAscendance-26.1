@@ -1,8 +1,8 @@
-package io.github.rainvaporeon.data;
+package io.github.rainvaporeon.gearascendance.data;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import io.github.rainvaporeon.EntryPoint;
+import io.github.rainvaporeon.gearascendance.EntryPoint;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;

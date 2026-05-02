@@ -1,4 +1,4 @@
-package io.github.rainvaporeon.utils;
+package io.github.rainvaporeon.gearascendance.utils;
 
 import java.util.function.Supplier;
 

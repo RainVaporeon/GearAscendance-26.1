@@ -1,14 +1,12 @@
-package io.github.rainvaporeon;
+package io.github.rainvaporeon.gearascendance;
 
-import io.github.rainvaporeon.commands.GiveTemplateCommand;
-import io.github.rainvaporeon.handler.*;
-import io.github.rainvaporeon.recipe.CraftingRecipeHandler;
-import io.github.rainvaporeon.utils.NamespaceManager;
+import io.github.rainvaporeon.gearascendance.commands.GiveTemplateCommand;
+import io.github.rainvaporeon.gearascendance.handler.*;
+import io.github.rainvaporeon.gearascendance.recipe.CraftingRecipeHandler;
+import io.github.rainvaporeon.gearascendance.utils.NamespaceManager;
 import org.bukkit.NamespacedKey;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 

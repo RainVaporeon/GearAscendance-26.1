@@ -1,7 +1,7 @@
-package io.github.rainvaporeon.handler;
+package io.github.rainvaporeon.gearascendance.handler;
 
-import io.github.rainvaporeon.data.ItemAscendanceInfo;
-import io.github.rainvaporeon.utils.AscendanceHelper;
+import io.github.rainvaporeon.gearascendance.data.ItemAscendanceInfo;
+import io.github.rainvaporeon.gearascendance.utils.AscendanceHelper;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;

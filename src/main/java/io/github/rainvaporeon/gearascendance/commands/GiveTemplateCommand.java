@@ -1,6 +1,9 @@
-package io.github.rainvaporeon.commands;
+package io.github.rainvaporeon.gearascendance.commands;
 
-import io.github.rainvaporeon.utils.*;
+import io.github.rainvaporeon.gearascendance.utils.ItemGetter;
+import io.github.rainvaporeon.gearascendance.utils.ItemInstances;
+import io.github.rainvaporeon.gearascendance.utils.Parser;
+import io.github.rainvaporeon.gearascendance.utils.TabCompletionHelper;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.command.Command;

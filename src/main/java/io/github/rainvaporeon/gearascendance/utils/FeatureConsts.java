@@ -1,4 +1,4 @@
-package io.github.rainvaporeon.utils;
+package io.github.rainvaporeon.gearascendance.utils;
 
 /**
  * Class holding feature constants.
@@ -53,6 +53,45 @@ public class FeatureConsts {
             case 4 -> 150;
             case 5 -> 300;
             default -> 300 + (templateTier - 5) * 25;
+        };
+    }
+
+    /**
+     * Whether attune pity is enabled <br />
+     * Attune pity is a mechanic to adjust the success rate
+     * as more consecutive fail count occur on the item.
+     * @return whether it is enabled
+     */
+    public static boolean attunePityEnabled() {
+        return true;
+    }
+
+    /**
+     * Whether the attune pity acts as a multiplier to the
+     * base rate, or is a flat addition
+     * @return {@code true} if multiplied, {@code false} if added
+     */
+    public static boolean isAttunePityMultiplier() {
+        return false;
+    }
+
+    /**
+     * Gets the attune pity
+     * @param failCount consecutive fails in a row
+     * @return the pity rate
+     */
+    public static int attunePityRate(int failCount) {
+        if (!attunePityEnabled()) return 0;
+        return switch (failCount) {
+            case 0, 1, 2 -> 0;
+            case 3 -> 3;
+            case 4 -> 7;
+            case 5 -> 12;
+            case 6 -> 20;
+            case 7 -> 31;
+            case 8 -> 46;
+            case 9 -> 74;
+            default -> (isAttunePityMultiplier() ? 10 * failCount : 100);
         };
     }
 

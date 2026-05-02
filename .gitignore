@@ -40,4 +40,4 @@ build/
 
 ### Testing ###
 /srv/
-!/src/main/java/io/github/rainvaporeon/utils/PSVM.java
+!/src/main/java/io/github/rainvaporeon/gearascendance/gearascendance/utils/PSVM.java

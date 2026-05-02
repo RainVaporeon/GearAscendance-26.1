@@ -1,6 +1,6 @@
-package io.github.rainvaporeon.recipe;
+package io.github.rainvaporeon.gearascendance.recipe;
 
-import io.github.rainvaporeon.utils.ItemGetter;
+import io.github.rainvaporeon.gearascendance.utils.ItemGetter;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;

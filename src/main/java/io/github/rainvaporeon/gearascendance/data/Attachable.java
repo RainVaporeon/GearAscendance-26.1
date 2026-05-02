@@ -1,6 +1,6 @@
-package io.github.rainvaporeon.data;
+package io.github.rainvaporeon.gearascendance.data;
 
-import io.github.rainvaporeon.utils.ItemUtils;
+import io.github.rainvaporeon.gearascendance.utils.ItemUtils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;

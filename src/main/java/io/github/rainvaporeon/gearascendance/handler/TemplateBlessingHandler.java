@@ -1,10 +1,10 @@
-package io.github.rainvaporeon.handler;
+package io.github.rainvaporeon.gearascendance.handler;
 
-import io.github.rainvaporeon.EntryPoint;
-import io.github.rainvaporeon.data.AscendanceTemplateInfo;
-import io.github.rainvaporeon.data.FakeBlessingItemInfo;
-import io.github.rainvaporeon.utils.AscendanceHelper;
-import io.github.rainvaporeon.utils.ItemGetter;
+import io.github.rainvaporeon.gearascendance.EntryPoint;
+import io.github.rainvaporeon.gearascendance.data.AscendanceTemplateInfo;
+import io.github.rainvaporeon.gearascendance.data.FakeBlessingItemInfo;
+import io.github.rainvaporeon.gearascendance.utils.AscendanceHelper;
+import io.github.rainvaporeon.gearascendance.utils.ItemGetter;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;

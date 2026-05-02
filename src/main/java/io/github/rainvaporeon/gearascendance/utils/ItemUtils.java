@@ -1,7 +1,7 @@
-package io.github.rainvaporeon.utils;
+package io.github.rainvaporeon.gearascendance.utils;
 
-import io.github.rainvaporeon.EntryPoint;
-import io.github.rainvaporeon.data.AscendanceTemplateInfo;
+import io.github.rainvaporeon.gearascendance.EntryPoint;
+import io.github.rainvaporeon.gearascendance.data.AscendanceTemplateInfo;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
