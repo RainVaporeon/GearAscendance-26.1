@@ -1,6 +1,7 @@
 package io.github.rainvaporeon.gearascendance;
 
 import io.github.rainvaporeon.gearascendance.commands.GiveTemplateCommand;
+import io.github.rainvaporeon.gearascendance.commands.UpdateItemCommand;
 import io.github.rainvaporeon.gearascendance.handler.*;
 import io.github.rainvaporeon.gearascendance.recipe.CraftingRecipeHandler;
 import io.github.rainvaporeon.gearascendance.utils.NamespaceManager;
@@ -32,6 +33,7 @@ public class EntryPoint extends JavaPlugin {
 
         GiveTemplateCommand cmd = new GiveTemplateCommand();
         this.registerCommandExecutor("ascendance", cmd);
+        this.registerCommandExecutor("ascendance_updateitem", new UpdateItemCommand());
         this.registerEvents(
                 new GrindstoneHandler(),
                 new SmithCompletionHandler(),
