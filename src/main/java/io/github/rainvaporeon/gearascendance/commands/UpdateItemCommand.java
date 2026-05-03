@@ -6,7 +6,6 @@ import io.github.rainvaporeon.gearascendance.data.FakeBlessingItemInfo;
 import io.github.rainvaporeon.gearascendance.data.ItemAscendanceInfo;
 import io.github.rainvaporeon.gearascendance.utils.AscendanceHelper;
 import io.github.rainvaporeon.gearascendance.utils.ItemGetter;
-import io.github.rainvaporeon.gearascendance.utils.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
