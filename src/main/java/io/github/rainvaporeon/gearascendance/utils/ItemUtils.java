@@ -2,6 +2,7 @@ package io.github.rainvaporeon.gearascendance.utils;
 
 import io.github.rainvaporeon.gearascendance.EntryPoint;
 import io.github.rainvaporeon.gearascendance.data.AscendanceTemplateInfo;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -118,6 +119,13 @@ public class ItemUtils {
      * @param metaConsumer the meta to perform modification on
      */
     public static void applyMeta(ItemStack isx, Consumer<ItemMeta> metaConsumer) {
+        if (!isx.hasItemMeta()) {
+            ItemMeta metadata = Bukkit.getItemFactory().getItemMeta(isx.getType());
+
+            if (metadata == null) return; // silently discard
+
+            isx.setItemMeta(metadata);
+        }
         ItemMeta im = isx.getItemMeta();
         metaConsumer.accept(im);
         isx.setItemMeta(im);
