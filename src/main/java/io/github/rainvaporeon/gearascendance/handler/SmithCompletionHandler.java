@@ -142,7 +142,10 @@ public class SmithCompletionHandler implements Listener {
                 ChatColor.RED + "The ascendance attempt failed!"
         );
 
-        if (info.blessed() || is.getEnchantmentLevel(Enchantment.VANISHING_CURSE) > 0) {
+        // cursed iif rolled for less than rate (random < 40.0)
+        boolean cursed = Math.random() < (FeatureConsts.ascendanceFailureCurseRate() / 100.0);
+
+        if (!cursed || info.blessed() || is.getEnchantmentLevel(Enchantment.VANISHING_CURSE) > 0) {
             clicker.sendMessage(
                     ChatColor.GRAY + "Nothing occurred."
             );

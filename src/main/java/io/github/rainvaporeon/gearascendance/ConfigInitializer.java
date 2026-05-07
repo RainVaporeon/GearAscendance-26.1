@@ -85,6 +85,19 @@ class ConfigInitializer {
 
         putDefaults(
                 cfg,
+                FeatureConsts.ASCENDANCE_FAIL_CURSE_RATE_KEY,
+                40
+        );
+        cfg.setComments(
+                FeatureConsts.ASCENDANCE_FAIL_CURSE_RATE_KEY,
+                List.of(
+                        "Rate to curse the ascending tool on failure",
+                        "Default: 40"
+                )
+        );
+
+        putDefaults(
+                cfg,
                 FeatureConsts.BLESSING_BASE_RATE_KEY,
                 40
         );

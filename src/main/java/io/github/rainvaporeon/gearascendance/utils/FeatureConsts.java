@@ -28,6 +28,8 @@ public class FeatureConsts {
     public static final String ASCENDANCE_SUCCESS_MULTIPLIER_KEY = "ascendance.success_multiplier";
     public static final String ASCENDANCE_BASE_SUCCESS_RATE_KEY = "ascendance.base.rate";
 
+    public static final String ASCENDANCE_FAIL_CURSE_RATE_KEY = "ascendance.fail_curse_rate";
+
     // Configuration key end
 
     /**
@@ -176,5 +178,14 @@ public class FeatureConsts {
                 String.valueOf(upgradeTier),
                 def
         );
+    }
+
+    /**
+     * Gets the curse rate on failure
+     * @return the rate to curse a tool if the ascension fails, default 40
+     */
+    public static int ascendanceFailureCurseRate() {
+        int rate = EntryPoint.getInstance().getConfig().getInt(ASCENDANCE_FAIL_CURSE_RATE_KEY, 40);
+        return Math.clamp(rate, 0, 100);
     }
 }
