@@ -167,7 +167,7 @@ public class FeatureConsts {
     //               associated with the item, in addition to reduction of
     //               possible enchantments to boost.
     public static int baseSuccessRate(int upgradeTier) {
-        if (upgradeTier <= 0) return 0;
+        if (upgradeTier < 0) return 0;
         Map<String, Object> map = EntryPoint.getInstance().getConfig().getConfigurationSection(ASCENDANCE_BASE_SUCCESS_RATE_KEY).getValues(false);
 
         int def = (int) map.getOrDefault("-1", 2);
