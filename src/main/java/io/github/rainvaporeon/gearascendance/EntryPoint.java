@@ -14,7 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jspecify.annotations.NonNull;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -99,10 +98,6 @@ public class EntryPoint extends JavaPlugin {
     @NonNull
     public FileConfiguration getConfig() {
         return super.getConfig();
-    }
-
-    public static boolean isActive() {
-        return INSTANCE.isEnabled();
     }
 
     public static JavaPlugin getInstance() {
