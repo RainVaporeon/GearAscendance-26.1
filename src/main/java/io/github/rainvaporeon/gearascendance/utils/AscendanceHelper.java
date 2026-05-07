@@ -68,7 +68,7 @@ public class AscendanceHelper {
         // note: ok so we want lhs without rhs so we do this instead
         List<Enchantment> candidates = new ArrayList<>();
         List<Enchantment> applied = ascendanceInfo.appliedAscendance();
-        is.getEnchantments().keySet().forEach(ench -> {
+        isx.getEnchantments().keySet().forEach(ench -> {
             if (applied.contains(ench)) return;
             candidates.add(ench);
         });
