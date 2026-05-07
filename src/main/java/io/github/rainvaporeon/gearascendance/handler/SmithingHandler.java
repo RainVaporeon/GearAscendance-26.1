@@ -15,9 +15,9 @@ public class SmithingHandler implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onSmithingTableWork(PrepareSmithingEvent event) {
-        ItemStack templateItem = event.getInventory().getItem(0);
-        ItemStack craftingTool = event.getInventory().getItem(1);
-        ItemStack withMaterial = event.getInventory().getItem(2);
+        ItemStack templateItem = event.getInventory().getInputTemplate(); // event.getInventory().getItem(0);
+        ItemStack craftingTool = event.getInventory().getInputEquipment(); // event.getInventory().getItem(1);
+        ItemStack withMaterial = event.getInventory().getInputMineral(); // event.getInventory().getItem(2);
 
         // not an ascension template
         if (!AscendanceHelper.isValidTemplateItem(templateItem)) {
