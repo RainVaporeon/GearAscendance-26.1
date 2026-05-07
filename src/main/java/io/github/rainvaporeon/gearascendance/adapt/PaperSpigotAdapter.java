@@ -3,6 +3,8 @@ package io.github.rainvaporeon.gearascendance.adapt;
 import io.github.rainvaporeon.gearascendance.EntryPoint;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -29,7 +31,11 @@ public class PaperSpigotAdapter {
     }
 
     public static String getItemName(ItemStack stack) {
-        if (!stack.hasItemMeta()) return stack.effectiveName().toString();
-        return stack.getItemMeta().itemName().toString();
+        if (!stack.hasItemMeta()) return componentToString(stack.effectiveName());
+        return componentToString(stack.getItemMeta().itemName());
+    }
+
+    public static String componentToString(Component component) {
+        return PlainTextComponentSerializer.plainText().serialize(component);
     }
 }
