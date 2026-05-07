@@ -17,6 +17,7 @@ import org.bukkit.event.inventory.SmithItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
+@SuppressWarnings("deprecation") // paper won't deprecate these really
 public class TemplateBlessingHandler implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)

@@ -3,8 +3,8 @@ package io.github.rainvaporeon.gearascendance.data;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.github.rainvaporeon.gearascendance.EntryPoint;
+import io.github.rainvaporeon.gearascendance.adapt.PaperSpigotAdapter;
 import org.bukkit.NamespacedKey;
-import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -24,7 +24,7 @@ public record AscendanceTemplateInfo(
         if (attune == null) {
             jo.addProperty("attune", "null");
         } else {
-            jo.addProperty("attune", String.valueOf(attune.getKeyOrNull()));
+            jo.addProperty("attune", String.valueOf(PaperSpigotAdapter.getKey(attune)));
         }
         return jo.toString();
     }
@@ -54,7 +54,7 @@ public record AscendanceTemplateInfo(
             return new AscendanceTemplateInfo(
                     jo.get("tier").getAsInt(),
                     jo.get("blessed").getAsBoolean(),
-                    attune.equals("null") ? null : Registry.ENCHANTMENT.get(NamespacedKey.fromString(jo.get("attune").getAsString()))
+                    attune.equals("null") ? null : PaperSpigotAdapter.getEnchantmentRegistry().get(PaperSpigotAdapter.keyString(jo.get("attune").getAsString()))
             );
         } catch (RuntimeException e) {
             return AscendanceTemplateInfo.NONE;

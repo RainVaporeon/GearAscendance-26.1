@@ -21,6 +21,7 @@ import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
+@SuppressWarnings("deprecation") // paper won't deprecate these really
 public class TemplateUpgradeHandler implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)

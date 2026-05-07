@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.github.rainvaporeon.gearascendance.EntryPoint;
+import io.github.rainvaporeon.gearascendance.adapt.PaperSpigotAdapter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
@@ -42,10 +43,10 @@ public record FakeAscendanceItemInfo(
         if (attunement == null) {
             jo.addProperty("attune", "null");
         } else {
-            jo.addProperty("attune", String.valueOf(attunement.getKeyOrNull()));
+            jo.addProperty("attune", String.valueOf(attunement.getKey()));
         }
         JsonArray ja = new JsonArray();
-        upgradeCandidates.forEach(en -> ja.add(String.valueOf(en.getKeyOrNull())));
+        upgradeCandidates.forEach(en -> ja.add(String.valueOf(PaperSpigotAdapter.getKey(en))));
         jo.add("candidates", ja);
         return jo.toString();
     }
@@ -68,10 +69,10 @@ public record FakeAscendanceItemInfo(
             JsonObject payload = JsonParser.parseString(json).getAsJsonObject();
             List<Enchantment> enchantments = new ArrayList<>();
             String attunement = payload.get("attune").getAsString();
-            Enchantment attune = attunement.equals("null") ? null : Registry.ENCHANTMENT.get(NamespacedKey.fromString(payload.get("attune").getAsString()));
+            Enchantment attune = attunement.equals("null") ? null : PaperSpigotAdapter.getEnchantmentRegistry().get(PaperSpigotAdapter.keyString(payload.get("attune").getAsString()));
             payload.getAsJsonArray("candidates").forEach(je -> {
                 if (je.getAsString().equals("null") || je.getAsString().isBlank()) return;
-                enchantments.add(Registry.ENCHANTMENT.get(NamespacedKey.fromString(je.getAsString())));
+                enchantments.add(PaperSpigotAdapter.getEnchantmentRegistry().get(PaperSpigotAdapter.keyString(je.getAsString())));
             });
             return new FakeAscendanceItemInfo(
                     payload.get("nextTier").getAsInt(),

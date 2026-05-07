@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.github.rainvaporeon.gearascendance.EntryPoint;
+import io.github.rainvaporeon.gearascendance.adapt.PaperSpigotAdapter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
@@ -35,7 +36,7 @@ public record ItemAscendanceInfo(
         JsonObject jo = new JsonObject();
         jo.addProperty("tier", ascendanceTier);
         JsonArray arr = new JsonArray();
-        appliedAscendance.forEach(enc -> arr.add(String.valueOf(enc.getKeyOrNull())));
+        appliedAscendance.forEach(enc -> arr.add(String.valueOf(PaperSpigotAdapter.getKey(enc))));
         jo.add("ascendance", arr);
         return jo.toString();
     }
@@ -60,7 +61,8 @@ public record ItemAscendanceInfo(
             jo.get("ascendance").getAsJsonArray().forEach(je -> {
                 String key = je.getAsString();
                 if ("null".equals(key) || key.isBlank()) return;
-                Enchantment ench = Registry.ENCHANTMENT.get(NamespacedKey.fromString(key));
+                Enchantment ench = PaperSpigotAdapter.getEnchantmentRegistry()
+                        .get(PaperSpigotAdapter.keyString(key));
                 enchs.add(ench);
             });
             return new ItemAscendanceInfo(jo.get("tier").getAsInt(), enchs);

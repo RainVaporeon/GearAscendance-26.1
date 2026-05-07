@@ -3,8 +3,8 @@ package io.github.rainvaporeon.gearascendance.data;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.github.rainvaporeon.gearascendance.EntryPoint;
+import io.github.rainvaporeon.gearascendance.adapt.PaperSpigotAdapter;
 import org.bukkit.NamespacedKey;
-import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -27,7 +27,7 @@ public record FakeBlessingItemInfo(
         if (attune == null) {
             jo.addProperty("attune", "null");
         } else {
-            jo.addProperty("attune", String.valueOf(attune.getKeyOrNull()));
+            jo.addProperty("attune", String.valueOf(PaperSpigotAdapter.getKey(attune)));
         }
         return jo.toString();
     }
@@ -53,7 +53,7 @@ public record FakeBlessingItemInfo(
         if ("null".equals(tag) || tag.isBlank()) {
             return new FakeBlessingItemInfo(tier, chance, null);
         } else {
-            return new FakeBlessingItemInfo(tier, chance, Registry.ENCHANTMENT.get(NamespacedKey.fromString(tag)));
+            return new FakeBlessingItemInfo(tier, chance, PaperSpigotAdapter.getEnchantmentRegistry().get(PaperSpigotAdapter.keyString(tag)));
         }
 
     }

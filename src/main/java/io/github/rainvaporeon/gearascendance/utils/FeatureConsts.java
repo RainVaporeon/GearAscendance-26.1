@@ -1,10 +1,34 @@
 package io.github.rainvaporeon.gearascendance.utils;
 
+import io.github.rainvaporeon.gearascendance.EntryPoint;
+
+import java.util.Map;
+
 /**
  * Class holding feature constants.
  */
 // Note: This class was created so it can be scaled easier down the road.
 public class FeatureConsts {
+    // Configuration key start
+
+    public static final String ASCENDANCE_CAP_KEY = "ascendance.cap";
+
+    public static final String ATTUNE_MAX_REROLL_KEY = "attune.max_reroll";
+    public static final String ATTUNE_BASE_SUCCESS_KEY = "attune.base.rate";
+    public static final String ATTUNE_BASE_XP_COST_KEY = "attune.base.xp_cost";
+    public static final String ATTUNE_SUCCESS_MULTIPLIER_KEY = "attune.success_multiplier";
+    // pity is not implemented
+    public static final String ATTUNE_PITY_ENABLED_KEY = "attune.pity.enabled";
+    public static final String ATTUNE_PITY_IS_MULTIPLIER_KEY = "attune.pity.is_multiplier";
+    public static final String ATTUNE_PITY_RATE_KEY = "attune.pity.rate";
+    // end pity
+    public static final String BLESSING_BASE_RATE_KEY = "blessing.base";
+    public static final String BLESSING_SUCCESS_MULTIPLIER_KEY = "blessing.success_multiplier";
+
+    public static final String ASCENDANCE_SUCCESS_MULTIPLIER_KEY = "ascendance.success_multiplier";
+    public static final String ASCENDANCE_BASE_SUCCESS_RATE_KEY = "ascendance.base.rate";
+
+    // Configuration key end
 
     /**
      * Gets the maximum levels of ascendance allowed
@@ -13,7 +37,7 @@ public class FeatureConsts {
     // Balance note: Limiting the maximum ascensions requires the player
     //               to pick at most this many enchantments to boost.
     public static int ascendanceCap() {
-        return 3;
+        return EntryPoint.getInstance().getConfig().getInt(ASCENDANCE_CAP_KEY);
     }
 
     /**
@@ -24,7 +48,7 @@ public class FeatureConsts {
     // Balance note: Recall that it is easier to get a specific enchantment
     //               boosted as the ascension rises.
     public static int attuneMaxRerolls() {
-        return 2;
+        return EntryPoint.getInstance().getConfig().getInt(ATTUNE_MAX_REROLL_KEY);
     }
 
     /**
@@ -32,11 +56,11 @@ public class FeatureConsts {
      * @return the success rate
      */
     public static int attuneSuccessRate() {
-        return 20;
+        return EntryPoint.getInstance().getConfig().getInt(ATTUNE_BASE_SUCCESS_KEY);
     }
 
     public static int attunementXPCost() {
-        return 30;
+        return EntryPoint.getInstance().getConfig().getInt(ATTUNE_BASE_XP_COST_KEY);
     }
 
     /**
@@ -46,14 +70,15 @@ public class FeatureConsts {
      */
     public static int attuneSuccessMultiplier(int templateTier) {
         if (templateTier <= 0) return 0;
-        return switch (templateTier) {
-            case 1 -> 50;
-            case 2 -> 75;
-            case 3 -> 100;
-            case 4 -> 150;
-            case 5 -> 300;
-            default -> 300 + (templateTier - 5) * 25;
-        };
+        Map<String, Object> map = EntryPoint.getInstance().getConfig().getConfigurationSection(ATTUNE_BASE_SUCCESS_KEY).getValues(false);
+
+        int basis = (int) map.getOrDefault("-10", 300);
+        int step = (int) map.getOrDefault("-1", 25);
+
+        return (int) map.getOrDefault(
+                String.valueOf(templateTier),
+                basis + step * (templateTier - 5)
+        );
     }
 
     /**
@@ -96,19 +121,20 @@ public class FeatureConsts {
     }
 
     public static int blessingSuccessRate() {
-        return 40;
+        return EntryPoint.getInstance().getConfig().getInt(BLESSING_BASE_RATE_KEY);
     }
 
     public static int blessingSuccessMultiplier(int templateTier) {
         if (templateTier <= 0) return 0;
-        return switch (templateTier) {
-            case 1 -> 0;
-            case 2 -> 66;
-            case 3 -> 133;
-            case 4 -> 200;
-            case 5 -> 250;
-            default -> 250 + (templateTier - 5) * 50;
-        };
+        Map<String, Object> map = EntryPoint.getInstance().getConfig().getConfigurationSection(BLESSING_SUCCESS_MULTIPLIER_KEY).getValues(false);
+
+        int basis = (int) map.getOrDefault("-10", 250);
+        int step = (int) map.getOrDefault("-1", 50);
+
+        return (int) map.getOrDefault(
+                String.valueOf(templateTier),
+                basis + step * (templateTier - 5)
+        );
     }
 
     /**
@@ -121,14 +147,15 @@ public class FeatureConsts {
     //               and instead focusing on getting higher tiered templates.
     public static int successMultiplier(int templateTier) {
         if (templateTier <= 0) return 0;
-        return switch (templateTier) {
-            case 1 -> 40;
-            case 2 -> 70;
-            case 3 -> 100;
-            case 4 -> 150;
-            case 5 -> 200;
-            default -> 200 + (15 * (templateTier - 4));
-        };
+        Map<String, Object> map = EntryPoint.getInstance().getConfig().getConfigurationSection(ATTUNE_SUCCESS_MULTIPLIER_KEY).getValues(false);
+
+        int basis = (int) map.getOrDefault("-10", 200);
+        int step = (int) map.getOrDefault("-1", 15);
+
+        return (int) map.getOrDefault(
+                String.valueOf(templateTier),
+                basis + step * (templateTier - 4)
+        );
     }
 
     /**
@@ -140,14 +167,14 @@ public class FeatureConsts {
     //               associated with the item, in addition to reduction of
     //               possible enchantments to boost.
     public static int baseSuccessRate(int upgradeTier) {
-        if (upgradeTier < 0) return 100;
-        return switch (upgradeTier) {
-            case 0 -> 50;
-            case 1 -> 35;
-            case 2 -> 15;
-            case 3 -> 10;
-            case 4 -> 5;
-            default -> 2;
-        };
+        if (upgradeTier <= 0) return 0;
+        Map<String, Object> map = EntryPoint.getInstance().getConfig().getConfigurationSection(ASCENDANCE_BASE_SUCCESS_RATE_KEY).getValues(false);
+
+        int def = (int) map.getOrDefault("-1", 2);
+
+        return (int) map.getOrDefault(
+                String.valueOf(upgradeTier),
+                def
+        );
     }
 }

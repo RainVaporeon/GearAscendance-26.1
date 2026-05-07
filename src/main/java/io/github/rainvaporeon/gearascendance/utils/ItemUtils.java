@@ -1,6 +1,7 @@
 package io.github.rainvaporeon.gearascendance.utils;
 
 import io.github.rainvaporeon.gearascendance.EntryPoint;
+import io.github.rainvaporeon.gearascendance.adapt.PaperSpigotAdapter;
 import io.github.rainvaporeon.gearascendance.data.AscendanceTemplateInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("deprecation") // paper won't deprecate these really
 public class ItemUtils {
 
     public static boolean applyGlintAndHideEnchants(ItemStack is) {
@@ -70,7 +72,7 @@ public class ItemUtils {
 
     public static String convertToDisplayName(Enchantment e) {
         if (e == null) return "null";
-        NamespacedKey key = e.getKeyOrNull();
+        NamespacedKey key = PaperSpigotAdapter.getKey(e);
         if (key == null) return "null";
         String name = key.getKey(); // e.g. "sharpness"
 

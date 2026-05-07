@@ -1,5 +1,6 @@
 package io.github.rainvaporeon.gearascendance.commands;
 
+import io.github.rainvaporeon.gearascendance.adapt.PaperSpigotAdapter;
 import io.github.rainvaporeon.gearascendance.utils.ItemGetter;
 import io.github.rainvaporeon.gearascendance.utils.ItemInstances;
 import io.github.rainvaporeon.gearascendance.utils.Parser;
@@ -50,7 +51,7 @@ public class GiveTemplateCommand implements CommandExecutor, TabExecutor {
         NamespacedKey key = bias.isBlank() ? null : NamespacedKey.fromString(bias);
 
         ItemStack is = ItemGetter.getAscendanceTemplate(
-                tier, blessed, key == null ? null : Registry.ENCHANTMENT.get(key)
+                tier, blessed, key == null ? null : PaperSpigotAdapter.getEnchantmentRegistry().get(key)
         );
 
         is.setAmount(amount);
@@ -64,7 +65,7 @@ public class GiveTemplateCommand implements CommandExecutor, TabExecutor {
         if (is.hasItemMeta()) {
             ItemMeta meta = is.getItemMeta();
             assert meta != null;
-            name = meta.getItemName();
+            name = PaperSpigotAdapter.getItemName(is);
         } else {
             name = is.getType().toString();
         }
@@ -104,10 +105,7 @@ public class GiveTemplateCommand implements CommandExecutor, TabExecutor {
                 return TabCompletionHelper.provideStarting(args[4], "true", "false");
             }
             if (args.length == 6) {
-                return TabCompletionHelper.provideStarting(args[5], Registry.ENCHANTMENT.stream().filter(e -> {
-                    NamespacedKey key = e.getKeyOrNull();
-                    return key != null;
-                }).map(e -> e.getKeyOrNull().getKey()).toList());
+                return TabCompletionHelper.provideStarting(args[5], PaperSpigotAdapter.getEnchantmentRegistry().stream().map(e -> PaperSpigotAdapter.getKey(e).getKey()).toList());
             }
         }
 

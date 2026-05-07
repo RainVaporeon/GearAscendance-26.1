@@ -18,6 +18,7 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("deprecation") // paper won't deprecate these really
 public class SmithCompletionHandler implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)

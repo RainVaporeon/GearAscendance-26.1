@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+@SuppressWarnings("deprecation") // paper won't deprecate these really
 public class AscendanceHelper {
 
     public static boolean isValidTemplateItem(ItemStack is) {

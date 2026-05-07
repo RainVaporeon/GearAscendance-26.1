@@ -8,8 +8,15 @@ import io.github.rainvaporeon.gearascendance.utils.NamespaceManager;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jspecify.annotations.NonNull;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class EntryPoint extends JavaPlugin {
 
@@ -42,11 +49,36 @@ public class EntryPoint extends JavaPlugin {
                 new TemplateBlessingHandler(),
                 new CraftingRecipeHandler()
         );
+
+        FileConfiguration cfg = this.getConfig();
+        try {
+            cfg.load("plugins/GearAscendance.yml");
+        } catch (FileNotFoundException ex) {
+            ConfigInitializer.setup(cfg);
+            try {
+                cfg.save("plugins/GearAscendance.yml");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (IOException ex) {
+            throw new RuntimeException();
+        } catch (InvalidConfigurationException ex) {
+            throw new RuntimeException(ex);
+        }
+
+
+
     }
 
     @Override
     public void onDisable() {
-        super.onDisable();
+        try {
+            this.getConfig().save("plugins/GearAscendance.yml");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            super.onDisable();
+        }
     }
 
     private void registerEvents(Listener... listeners) {
@@ -62,6 +94,11 @@ public class EntryPoint extends JavaPlugin {
             return;
         }
         c.setExecutor(exec);
+    }
+
+    @NonNull
+    public FileConfiguration getConfig() {
+        return super.getConfig();
     }
 
     public static boolean isActive() {
