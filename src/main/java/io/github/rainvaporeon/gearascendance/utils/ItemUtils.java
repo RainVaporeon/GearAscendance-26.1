@@ -7,7 +7,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -21,13 +20,6 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("deprecation") // paper won't deprecate these really
 public class ItemUtils {
-
-    public static boolean applyGlintAndHideEnchants(ItemStack is) {
-        if (is.getItemMeta() == null) return false;
-        is.addUnsafeEnchantment(Enchantment.PROTECTION, 1);
-        ItemUtils.applyMeta(is, meta -> meta.addItemFlags(ItemFlag.HIDE_ENCHANTS));
-        return true;
-    }
 
     public static void setTemplateAscendanceTier(ItemStack is, int level, boolean blessed, Enchantment attuned) {
         if (!is.hasItemMeta()) {
