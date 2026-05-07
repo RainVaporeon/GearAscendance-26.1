@@ -100,11 +100,11 @@ class ConfigInitializer {
                 FeatureConsts.BLESSING_SUCCESS_MULTIPLIER_KEY,
                 new HashMap<Integer, Integer>() {{
                     put(1, 0);
-                    put(2, 66);
-                    put(3, 133);
-                    put(4, 200);
-                    put(5, 250);
-                    put(-10, 250);
+                    put(2, 75);
+                    put(3, 166);
+                    put(4, 233);
+                    put(5, 400);
+                    put(-10, 500);
                     put(-1, 50);
                 }}
         );
@@ -142,7 +142,7 @@ class ConfigInitializer {
         putDefaults(
                 cfg,
                 FeatureConsts.ATTUNE_BASE_SUCCESS_KEY,
-                20
+                40
         );
         cfg.setComments(
                 FeatureConsts.ATTUNE_BASE_SUCCESS_KEY,
@@ -169,9 +169,9 @@ class ConfigInitializer {
                 FeatureConsts.ATTUNE_SUCCESS_MULTIPLIER_KEY,
                 new HashMap<Integer, Integer>() {{
                     put(1, 50);
-                    put(2, 75);
-                    put(3, 100);
-                    put(4, 150);
+                    put(2, 80);
+                    put(3, 120);
+                    put(4, 160);
                     put(5, 300);
                     put(-10, 300);
                     put(-1, 25);
